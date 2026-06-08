@@ -48,7 +48,7 @@ This project allows users to register, log in, shorten long URLs, and manage the
 
 ---
 
-# ow to Run
+# how to Run
 
 - Clone the repository
 - Install dependencies: `pip install -r requirements.txt`

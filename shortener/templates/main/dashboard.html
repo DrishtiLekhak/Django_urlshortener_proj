@@ -1,0 +1,55 @@
+{% extends 'base.html' %}
+
+{% block title %}
+dashboard-page
+{% endblock title %}
+
+{% block content %}
+<div class="card">
+    <h2>Your URLs</h2>
+
+    <a href="{% url 'create_url' %}">
+        <button>Create New URL</button>
+    </a>
+
+    <br><br>
+{% if messages %}
+            {% for m in messages %}
+               {% if m.tags == 'success' %}
+
+               <p class="text-center text-success">{{m}}</p>
+
+               {% else %}
+                <p class="text-center text-danger">{{m}}</p>
+                 
+               {% endif %}
+            {% endfor %}
+        {% endif %}
+    <table>
+        <tr>
+            <th>Original URL</th>
+            <th>Short URL</th>
+            <th>Created_at</th>
+            <th>Clicks</th>
+            <th>Actions</th>
+        </tr>
+
+        {% for url in urls %}
+        <tr>
+            <td>{{url.original_url}}</td>
+            <td>
+                <a href="http://127.0.0.1:8000/{{url.short_code}}" target="_blank">
+                   {{url.short_code}}
+                </a>
+            </td>
+            <td>{{url.created_at}}</td>
+            <td>{{url.click_count}}</td>
+            <td>
+                <a class="btn edit" href="{% url 'edit_url' url.id %}"><i class="fa-regular fa-pen-to-square"></i></a>
+                <a class="btn delete" href="{% url 'delete_url' url.id %}"><i class="fa-regular fa-trash-can"></i></a>
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+</div>
+{% endblock %}

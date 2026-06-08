@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% block title %}
+  home-page
+{% endblock title %}
+
+
+{% block content %}
+<div class="card">
+    <h2>Welcome to URL Shortener</h2>
+    <p>Shorten your long URLs easily and track clicks.</p>
+
+    {% if user.is_authenticated %}
+      <a href="{% url 'create_url' %}"><button>Create Short URL</button></a>
+    
+    {% else %}
+
+        <a href="{% url 'login_page' %}"><button>Get Started</button></a>
+        
+    {% endif %}
+</div>
+{% endblock %}
