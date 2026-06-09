@@ -25,7 +25,7 @@ dashboard-page
                {% endif %}
             {% endfor %}
         {% endif %}
-    <table>
+    <table class="table-container">
         <tr>
             <th>Original URL</th>
             <th>Short URL</th>
@@ -38,10 +38,11 @@ dashboard-page
         <tr>
             <td>{{url.original_url}}</td>
             <td>
-                <a href="http://127.0.0.1:8000/{{url.short_code}}" target="_blank">
-                   {{url.short_code}}
+                <a href="{% url 'redirect_url' url.short_code %}" target="_blank">
+                    {{ url.short_code }}
                 </a>
             </td>
+            
             <td>{{url.created_at}}</td>
             <td>{{url.click_count}}</td>
             <td>
