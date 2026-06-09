@@ -16,10 +16,11 @@
 
                 {% if messages %}
                     {% for m in messages %}
-                        <div class="text-center mb-2
-                            {% if m.tags == 'success' %}text-success{% else %}text-danger{% endif %}">
-                            {{ m }}
-                        </div>
+                        {% if m.tags == 'success' %}
+                          <p class="text-center text-success">{{m}}</p>
+                          {% else %}
+                           <p class="text-center text-danger">{{m}}</p>
+                        {% endif %}
                     {% endfor %}
                 {% endif %}
 
