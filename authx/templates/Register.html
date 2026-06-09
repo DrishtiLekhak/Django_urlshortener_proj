@@ -2,68 +2,100 @@
 
 {% block content %}
 
-<div class="container mt-5" style="max-width: 550px;">
-    <div class="card shadow p-4">
+<div class="container py-4">
 
-        <h3 class="text-center mb-3">Create Account</h3>
+    <div class="row justify-content-center">
 
-        {% if messages %}
-            {% for m in messages %}
-               {% if m.tags == 'success' %}
+        <div class="col-12 col-sm-11 col-md-9 col-lg-7">
 
-               <p class="text-center text-success">{{m}}</p>
+            <div class="card shadow p-4">
 
-               {% else %}
-                <p class="text-center text-danger">{{m}}</p>
-                 
-               {% endif %}
-            {% endfor %}
-        {% endif %}
+                <h3 class="text-center mb-4" style="color:#111827;">
+                    Create Account
+                </h3>
 
-        <form method="POST" action="{% url 'register_page' %}">
-            {% csrf_token %}
+                {% if messages %}
+                    {% for m in messages %}
+                        <div class="text-center mb-2
+                            {% if m.tags == 'success' %}text-success{% else %}text-danger{% endif %}">
+                            {{ m }}
+                        </div>
+                    {% endfor %}
+                {% endif %}
 
-            <div class="mb-3">
-                <label class="form-label">First Name</label>
-                <input type="text" name="firstName" class="form-control" placeholder="Enter username" required>
+                <form method="POST" action="{% url 'register_page' %}">
+                    {% csrf_token %}
+
+                    <div class="mb-3">
+                        <label class="form-label">First Name</label>
+                        <input type="text" name="firstName"
+                               class="form-control"
+                               placeholder="Enter first name"
+                               required>
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label">Last Name</label>
+                        <input type="text" name="lastName"
+                               class="form-control"
+                               placeholder="Enter last name"
+                               required>
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label">Email</label>
+                        <input type="email" name="email"
+                               class="form-control"
+                               placeholder="Enter email"
+                               required>
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label">Username</label>
+                        <input type="text" name="username"
+                               class="form-control"
+                               placeholder="Enter username"
+                               required>
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label">Password</label>
+                        <input type="password" name="password"
+                               class="form-control"
+                               placeholder="Enter password"
+                               required>
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label">Confirm Password</label>
+                        <input type="password" name="confirmpassword"
+                               class="form-control"
+                               placeholder="Confirm password"
+                               required>
+                    </div>
+
+                    <button type="submit"
+                            class="btn w-100"
+                            style="background:#2563eb; color:white; padding:10px;">
+                        Register
+                    </button>
+
+                </form>
+
+                <p class="text-center mt-3">
+                    Already have an account?
+                    <a href="{% url 'login_page' %}"
+                       style="color:#2563eb; text-decoration:none;">
+                        Login
+                    </a>
+                </p>
+
             </div>
 
-            <div class="mb-3">
-                <label class="form-label">Last Name</label>
-                <input type="text" name="lastName" class="form-control" placeholder="Enter username" required>
-            </div>
-
-            <div class="mb-3">
-                <label class="form-label">Email</label>
-                <input type="email" name="email" class="form-control" placeholder="Enter username" required>
-            </div>
-
-            <div class="mb-3">
-                <label class="form-label">Username</label>
-                <input type="text" name="username" class="form-control" placeholder="Enter username" required>
-            </div>
-
-            <div class="mb-3">
-                <label class="form-label">Password</label>
-                <input type="password" name="password" class="form-control" placeholder="Enter password" required>
-            </div>
-
-            <div class="mb-3">
-                <label class="form-label">Confirm Password</label>
-                <input type="password" name="confirmpassword" class="form-control" placeholder="Enter password" required>
-            </div>
-
-            <button type="submit" class="btn btn-primary w-100">
-                Register
-            </button>
-        </form>
-
-        <p class="text-center mt-3">
-            Already have an account?
-            <a href="{% url 'login_page' %}">Login</a>
-        </p>
+        </div>
 
     </div>
+
 </div>
 
 {% endblock %}

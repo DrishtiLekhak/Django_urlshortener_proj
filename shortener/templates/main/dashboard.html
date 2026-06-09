@@ -5,52 +5,105 @@ dashboard-page
 {% endblock title %}
 
 {% block content %}
-<div class="card">
-    <h2>Your URLs</h2>
 
-    <a href="{% url 'create_url' %}">
-        <button>Create New URL</button>
-    </a>
+<div class="container mt-4">
 
-    <br><br>
-{% if messages %}
-            {% for m in messages %}
-               {% if m.tags == 'success' %}
+    <!-- HEADER -->
+    <div class="d-flex justify-content-between align-items-center flex-wrap mb-3">
+        <h2 style="color:#111827;">Your URLs</h2>
 
-               <p class="text-center text-success">{{m}}</p>
+        <a href="{% url 'create_url' %}">
+            <button style="
+                background:#2563eb;
+                color:white;
+                border:none;
+                padding:10px 15px;
+                border-radius:6px;
+            ">
+                Create New URL
+            </button>
+        </a>
+    </div>
 
-               {% else %}
-                <p class="text-center text-danger">{{m}}</p>
-                 
-               {% endif %}
-            {% endfor %}
-        {% endif %}
-    <table class="table-container">
-        <tr>
-            <th>Original URL</th>
-            <th>Short URL</th>
-            <th>Created_at</th>
-            <th>Clicks</th>
-            <th>Actions</th>
-        </tr>
+    <!-- MESSAGES -->
+    {% if messages %}
+        {% for m in messages %}
+            <div class="alert {% if m.tags == 'success' %}alert-success{% else %}alert-danger{% endif %}">
+                {{ m }}
+            </div>
+        {% endfor %}
+    {% endif %}
+
+    <!-- COLUMN HEADINGS (like table header) -->
+    <div class="card shadow-sm p-3 mb-2 d-none d-md-block">
+        <div class="row fw-bold" style="color:#111827;">
+            <div class="col-md-4">Original URL</div>
+            <div class="col-md-2">Short URL</div>
+            <div class="col-md-3">Created At</div>
+            <div class="col-md-1">Clicks</div>
+            <div class="col-md-2">Actions</div>
+        </div>
+    </div>
+
+    <!-- DATA ROWS -->
+    <div class="row g-3">
 
         {% for url in urls %}
-        <tr>
-            <td>{{url.original_url}}</td>
-            <td>
-                <a href="{% url 'redirect_url' url.short_code %}" target="_blank">
-                    {{ url.short_code }}
-                </a>
-            </td>
-            
-            <td>{{url.created_at}}</td>
-            <td>{{url.click_count}}</td>
-            <td>
-                <a class="btn edit" href="{% url 'edit_url' url.id %}"><i class="fa-regular fa-pen-to-square"></i></a>
-                <a class="btn delete" href="{% url 'delete_url' url.id %}"><i class="fa-regular fa-trash-can"></i></a>
-            </td>
-        </tr>
+        <div class="col-12">
+
+            <div class="card shadow-sm p-3">
+
+                <div class="row align-items-center">
+
+                    <!-- ORIGINAL URL -->
+                    <div class="col-md-4">
+                        <div style="font-weight:bold; color:#346fe5;">
+                            {{ url.original_url }}
+                        </div>
+                    </div>
+
+                    <!-- SHORT URL -->
+                    <div class="col-md-2">
+                        <a href="{% url 'redirect_url' url.short_code %}" target="_blank"
+                           style="color:#2563eb; text-decoration:none;">
+                            {{ url.short_code }}
+                        </a>
+                    </div>
+
+                    <!-- CREATED AT -->
+                    <div class="col-md-3 text-muted">
+                        {{ url.created_at }}
+                    </div>
+
+                    <!-- CLICKS -->
+                    <div class="col-md-1">
+                        {{ url.click_count }}
+                    </div>
+
+                    <!-- ACTIONS -->
+                    <div class="col-md-2 mt-2 mt-md-0">
+
+                        <a href="{% url 'edit_url' url.id %}" 
+       style="color:#47b86b; font-size:18px; margin-right:10px;">
+        <i class="fa-regular fa-pen-to-square"></i>
+    </a>
+
+    <a href="{% url 'delete_url' url.id %}" 
+       style="color:#9d0909; font-size:18px;">
+        <i class="fa-regular fa-trash-can"></i>
+    </a>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
         {% endfor %}
-    </table>
+
+    </div>
+
 </div>
+
 {% endblock %}

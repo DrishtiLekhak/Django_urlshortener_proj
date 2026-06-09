@@ -1,22 +1,55 @@
 {% extends 'base.html' %}
 
 {% block title %}
-  home-page
+home-page
 {% endblock title %}
 
-
 {% block content %}
-<div class="card">
-    <h2>Welcome to URL Shortener</h2>
-    <p>Shorten your long URLs easily and track clicks.</p>
+
+<div class="card p-4">
+
+    <h2 style="color:#111827;">
+        Welcome to URL Shortener
+    </h2>
+
+    <p style="color:#6b7280;">
+        Shorten your long URLs easily and track clicks.
+    </p>
 
     {% if user.is_authenticated %}
-      <a href="{% url 'create_url' %}"><button>Create Short URL</button></a>
-    
+
+        <a href="{% url 'create_url' %}">
+            <button style="
+                background:#2563eb;
+                color:white;
+                border:none;
+                padding:10px 15px;
+                border-radius:6px;
+                width:200px;
+                margin-top:10px;
+            ">
+                Create Short URL
+            </button>
+        </a>
+
     {% else %}
 
-        <a href="{% url 'login_page' %}"><button>Get Started</button></a>
-        
+        <a href="{% url 'login_page' %}">
+            <button style="
+                background:#2563eb;
+                color:white;
+                border:none;
+                padding:10px 15px;
+                border-radius:6px;
+                width:200px;
+                margin-top:10px;
+            ">
+                Get Started
+            </button>
+        </a>
+
     {% endif %}
+
 </div>
+
 {% endblock %}
