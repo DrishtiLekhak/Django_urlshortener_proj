@@ -15,9 +15,13 @@ def registerPage(request):
         uname = data['username']
         psw = data['password']
         cpsw = data['confirmpassword']
-
+   
         if User.objects.filter(username=uname).exists():
             messages.error(request,'User with this username already exist!!!')
+            return redirect('register_page')
+        
+        if User.objects.filter(email=em).exists():
+            messages.error(request,'User with this email already exist!!!')
             return redirect('register_page')
 
         if psw != cpsw:
@@ -27,7 +31,6 @@ def registerPage(request):
         User.objects.create_user(first_name=fname,last_name=lname,username=uname,email=em,password=psw)
         messages.success(request,'Register Successfully!!!')
         return redirect('register_page')
-
 
     return render(request,'Register.html')
 
